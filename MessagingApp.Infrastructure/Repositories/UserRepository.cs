@@ -33,5 +33,10 @@ namespace MessagingApp.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return userEntry.Entity;
         }
+
+        public async Task<IEnumerable<User>> GetAllAsync()
+        {
+            return await _context.Users.ToListAsync();
+        }
     }
 }

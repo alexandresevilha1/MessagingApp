@@ -1,0 +1,59 @@
+﻿@model MessagingApp.WebUI.Models.ChatViewModel
+
+@{
+    ViewData["Title"] = "Chat com " + Model.TargetUserName;
+}
+
+<div class="card chat-container" style="height: 80vh; display: flex; flex-direction: column;">
+    <div class="card-header bg-primary text-white">
+        <i class="bi bi-person-circle"></i> Conversando com <strong>@Model.TargetUserName</strong>
+    </div>
+
+    <div class="card-body" style="flex: 1; overflow-y: auto; background-color: #f8f9fa;" id="chatBox">
+        @if (!Model.Messages.Any())
+        {
+            <div class="text-center text-muted mt-5">
+                <p>Nenhuma mensagem ainda. Diga olá!</p>
+            </div>
+        }
+        else
+        {
+            <div class="d-flex flex-column">
+                @foreach (var msg in Model.Messages)
+                {
+                    // Se SenderId == CurrentUserId, eu enviei (alinha à direita)
+                    bool isMe = msg.SenderId == Model.CurrentUserId;
+                    var alignment = isMe ? "align-self-end" : "align-self-start";
+                    var color = isMe ? "bg-primary text-white" : "bg-white border";
+
+                    <div class="p-2 my-1 rounded @color @alignment" style="max-width: 75%;">
+                        <div>@msg.Content</div>
+                        <div style="font-size: 0.7em; opacity: 0.8; text-align: right;">
+                            @msg.SentAt.ToLocalTime().ToString("HH:mm")
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <div class="card-footer">
+        <form asp-action="SendMessage" method="post" class="d-flex gap-2">
+            <input type="hidden" asp-for="TargetUserId" />
+
+            <input asp-for="NewMessageContent" class="form-control"
+                   placeholder="Digite sua mensagem..." autocomplete="off" required />
+
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-send-fill"></i> Enviar
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    window.onload = function () {
+        var chatBox = document.getElementById("chatBox");
+        chatBox.scrollTop = chatBox.scrollHeight;
+    };
+</script>

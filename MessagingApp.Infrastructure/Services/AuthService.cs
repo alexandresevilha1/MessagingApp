@@ -48,6 +48,7 @@ namespace MessagingApp.Infrastructure.Services
             if (result.Succeeded)
             {
                 var user = new User(
+                    Guid.Parse(identityUser.Id),
                     registerDto.FirstName,
                     registerDto.LastName,
                     registerDto.DateOfBirth,

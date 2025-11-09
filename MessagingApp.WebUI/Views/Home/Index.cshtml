@@ -1,8 +1,37 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<MessagingApp.Application.DTOs.UserDto>
+
+@{
+    ViewData["Title"] = "Lobby";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Bem-vindo ao MessagingApp</h1>
+    <p>Selecione alguém para começar a conversar.</p>
+</div>
+
+<div class="row mt-4">
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            Nenhum outro usuário encontrado no sistema. Convide amigos para se registrarem!
+        </div>
+    }
+    else
+    {
+        @foreach (var user in Model)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@user.FirstName @user.LastName</h5>
+                        <p class="card-text text-muted">@user.Email</p>
+
+                        <a asp-controller="Message" asp-action="Chat" asp-route-userId="@user.Id" class="btn btn-primary btn-sm w-100">
+                            <i class="bi bi-chat-dots"></i> Conversar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
 </div>

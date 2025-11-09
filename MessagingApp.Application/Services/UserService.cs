@@ -46,5 +46,18 @@ namespace MessagingApp.Application.Services
                 Email = user.Email
             };
         }
+
+        public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
+        {
+            var users = await _userRepository.GetAllAsync();
+
+            return users.Select(u => new UserDto
+            {
+                Id = u.Id,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                Email = u.Email
+            });
+        }
     }
 }

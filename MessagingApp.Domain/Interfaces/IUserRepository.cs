@@ -7,5 +7,6 @@ namespace MessagingApp.Domain.Interfaces
         Task<User> CreateUserAsync(User user);
         Task<User> FindUserByIdAsync(Guid id);
         Task<User> FindUserByEmailAsync(string email);
+        Task<IEnumerable<User>> GetAllAsync();
     }
 }

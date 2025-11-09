@@ -12,9 +12,9 @@
 
         public User() { }
 
-        public User(string firstName, string lastName, DateTime dateOfBirth, string gender, string countryOfOrigin, string email)
+        public User(Guid id, string firstName, string lastName, DateTime dateOfBirth, string gender, string countryOfOrigin, string email)
         {
-            Id = Guid.NewGuid();
+            Id = id;
             FirstName = firstName;
             LastName = lastName;
             DateOfBirth = dateOfBirth;

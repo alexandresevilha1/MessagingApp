@@ -8,5 +8,6 @@ namespace MessagingApp.Application.Interfaces
     {
         Task<UserDto> GetByIdAsync(Guid id);
         Task<UserDto> GetByEmailAsync(string email);
+        Task<IEnumerable<UserDto>> GetAllUsersAsync();
     }
 }
