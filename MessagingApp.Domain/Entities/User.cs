@@ -10,7 +10,7 @@
         public string CountryOfOrigin { get; private set; }
         public string Email { get; private set; }
 
-        protected User() { }
+        public User() { }
 
         public User(string firstName, string lastName, DateTime dateOfBirth, string gender, string countryOfOrigin, string email)
         {
