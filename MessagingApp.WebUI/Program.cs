@@ -1,12 +1,13 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using MessagingApp.Infrastructure.Data;
-using MessagingApp.Infrastructure.Identity;
-using MessagingApp.Domain.Interfaces;
-using MessagingApp.Infrastructure.Repositories;
 using MessagingApp.Application.Interfaces;
 using MessagingApp.Application.Services;
+using MessagingApp.Domain.Interfaces;
+using MessagingApp.Infrastructure.Data;
+using MessagingApp.Infrastructure.Identity;
+using MessagingApp.Infrastructure.Repositories;
 using MessagingApp.Infrastructure.Services;
+using MessagingApp.WebUI.Hubs;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,8 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
+builder.Services.AddSignalR();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -60,6 +63,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapHub<ChatHub>("/chatHub");
 
 app.MapControllerRoute(
     name: "default",
