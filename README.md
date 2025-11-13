@@ -1,4 +1,5 @@
 💬 [MessagingApp] - Aplicativo de Chat em Tempo Real
+
 Backend de um sistema de chat em tempo real desenvolvido para portfólio, focado em boas práticas, Arquitetura Limpa e comunicação assíncrona com SignalR.
 
 🚀 Sobre o Projeto
